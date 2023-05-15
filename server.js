@@ -40,15 +40,18 @@ app.get('/:shortUrl', async (req, res) => {
 
   if (url == null) return res.sendStatus(404);
 
-  // Log the click
-  const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-  const geo = geoip.lookup(ip);
-  const ua = uaParser(req.headers['user-agent']);
-  const logLine = `${new Date().toISOString()}, ${geo ? geo.country : 'Unknown'}, ${ua.os.name}, ${ip}\n`;
+ // Log the click - Remember that collecting and storing certain types of data may have privacy implications and may be regulated in some jurisdictions. Always make sure to respect your users' privacy and comply with all relevant laws and regulations.
+const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+const geo = geoip.lookup(ip);
+const ua = uaParser(req.headers['user-agent']);
+const referrer = req.headers['referrer'] || 'None';
+const language = req.headers['accept-language'] || 'None';
+const logLine = `${new Date().toISOString()}, ${geo ? geo.country : 'Unknown'}, ${ua.os.name}, ${ua.browser.name}, ${ua.device.type || 'Unknown'}, ${referrer}, ${language}, ${ip}\n`;
 
-  fs.appendFile('log.txt', logLine, (err) => {
-    if (err) console.error(err);
-  });
+fs.appendFile('log.txt', logLine, (err) => {
+  if (err) console.error(err);
+});
+
 
   res.redirect(url.full);
 });
