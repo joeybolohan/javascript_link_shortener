@@ -15,6 +15,11 @@ Ensure that you have the following installed on your local machine:
 
 ### Installation 
 
+Create a new directory for your project, and initialize it as a Node.js project by running npm init -y.
+
+Install the necessary Node.js packages by running: npm install express mongoose shortid geoip-lite ua-parser-js ejs
+
+
 1. Clone this repository
 
 git clone https://github.com/joeybolohan/javascript_link_shortener
