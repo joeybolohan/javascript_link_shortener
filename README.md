@@ -17,7 +17,7 @@ Ensure that you have the following installed on your local machine:
 
 1. Clone this repository
 
-git clone https://github.com/<your-github-username>/url-shortener
+git clone https://github.com/joeybolohan/javascript_link_shortener
   
 2. Navigate into the cloned repository
 
